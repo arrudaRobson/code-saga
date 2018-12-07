@@ -13,7 +13,11 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.create(recipe_params)
-    redirect_to @recipe
+    if @recipe.save
+      redirect_to @recipe
+    else
+      flash[:notice] = 'Você deve informar todos os dados da receita'
+    end
   end
 
   def edit
